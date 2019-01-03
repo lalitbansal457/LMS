@@ -1,0 +1,19 @@
+<table class="table table-bordered">
+	<caption>Leave requests submitted so far</caption>
+	<tr>
+		<th>Request No.</th>
+		<th>Name</th>
+		<th>Leave Date</th>
+		<th>Leave Reason</th>
+		<th>Submitted On</th>
+		<th>Status</th>
+	</tr>		
+	<tr *ngFor="let leaveRequest of leaveRequests;let i = index" >
+		<td>{{i+1}}</td>
+		<td>{{leaveRequest.employeeName}}</td>
+		<td>{{leaveRequest.leaveFrom}}<span *ngIf="leaveRequest.fromFirstHalf">(FH)</span><span *ngIf="leaveRequest.fromSecondHalf">(SH)</span> <b *ngIf="leaveRequest.leaveTo"> To</b> {{leaveRequest.leaveTo}}<span *ngIf="leaveRequest.toFirstHalf">(FH)</span></td>
+		<td>{{leaveRequest.leaveReason}}</td>
+		<td>{{leaveRequest.submitDate}}</td>
+		<td>{{leaveRequest.status}} <span *ngIf="leaveRequest.status == 'pending'"><button type="button" (click)="updateLeaveStatus(leaveRequest, i, 'approved')" class="btn btn-primary">Approve</button> <button type="button"  class="btn btn-primary" (click)="updateLeaveStatus(leaveRequest, i, 'denied')">Deny</button></span></td>
+	</tr>
+</table>	

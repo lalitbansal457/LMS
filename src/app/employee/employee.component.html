@@ -1,0 +1,82 @@
+<div class=''>
+	Welcome <b>{{userData.name}}</b>
+	<button>Log Out</button>
+</div>
+<div>
+	<div *ngIf="succesMessage" class="alert alert-success">
+	  Your leave request has been submitted successfully!.
+	</div>
+	<form [formGroup]="leaveForm" (ngSubmit)="applyLeave()">		
+		<div >
+			<div >
+				<div class="form-group">
+					<label for="leave-date">Leave Type</label>
+					<select name="leaveType" class="form-control" formControlName="leaveType">
+						<option value="SL" [selected]="true">SL</option>
+						<option value="CL">CL</option>
+						<option value="EL">EL</option>
+					</select>
+				</div>
+				<div  class="form-group">
+					<label for="leave-date">Enter Leave Date (From)</label>
+					<input  id="leave-date" type="date" class="form-control" formControlName="leaveFrom" >
+				</div>
+				<div  class="form-group">
+					<div class="col-md-6 formGroup" >
+						<label for="fromFirstHalf">First half : </label>
+						<input type="checkbox" id="fromFirstHalf" value="fromFirstHalf"  formControlName="fromFirstHalf">
+					</div>
+					<div class="col-md-6 formGroup" *ngIf="!leaveForm.get('fromFirstHalf').value">
+						<label for="fromSecondHalf">Second half :</label>
+						<input type="checkbox" name="fromHalf" value="fromSecondHalf" id="fromSecondHalf" formControlName="fromSecondHalf">
+					</div>
+				</div>
+				<div  class="form-group" *ngIf="!leaveForm.get('fromFirstHalf').value">
+					<label for="leave-date">Enter Leave Date (To)</label>
+					<input  id="leave-date" type="date" class="form-control" formControlName="leaveTo" >
+					<div>
+						<label for="fromSecondHalf">First half :</label>
+						<input type="checkbox" value="toFirstHalf" formControlName="toFirstHalf">
+					</div>
+					
+				</div>
+				<div>
+					<label for="leave-reason">Enter Leave Reason</label>
+					<input  id="leave-reason"class="form-control" formControlName="leaveReason">
+				</div>
+				<div>
+					<button type="submit" class="btn btn-primary">
+						Submit Request
+					</button>
+				</div>
+			</div>
+		</div>
+	</form>	
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+		
+	<div class=''>
+		<table class="table table-bordered">
+			<caption>Leave requests submitted so far</caption>
+			<tr>
+				<th>Request No.</th>
+				<th>Leave Date</th>
+				<th>Leave Reason</th>
+				<th>Submitted On</th>
+				<th>Current Status</th>
+				<th>Comment by reviewer</th>
+			</tr>		
+			<tr *ngFor="let leaveRequest of leaveRequests;let i = index" >
+				<td>{{i+1}}</td>
+				<td>{{leaveRequest.leaveFrom}}<span *ngIf="leaveRequest.fromFirstHalf">(FH)</span><span *ngIf="leaveRequest.fromSecondHalf">(SH)</span> - {{leaveRequest.leaveTo}}<span *ngIf="leaveRequest.toFirstHalf">(FH)</span></td>
+				<td>{{leaveRequest.leaveReason}}</td>
+				<td>{{leaveRequest.submitDate}}</td>
+				<td>{{leaveRequest.status}}</td>
+				<td>{{leaveRequest.comment}}</td>
+			</tr>
+		</table>		
+	</div>				
+</div>

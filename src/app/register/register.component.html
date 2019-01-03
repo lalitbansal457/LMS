@@ -1,0 +1,46 @@
+<div><h3>Sign Up</h3>
+	<hr>
+	<form [formGroup]="registerForm" (ngSubmit)="registerControl()">
+		<div class="form-group">
+			<input type="text" placeholder="name" class="form-control" formControlName="name">
+		</div>
+		<div class="form-group">
+			<input type="text" placeholder="email" class="form-control" formControlName="email">
+		</div>
+
+		<div class="form-group">
+			<input type="text" placeholder="employeeId" class="form-control" formControlName="employeeId">
+		</div>
+
+		<div class="form-group">
+			<input type="text" placeholder="leadId" class="form-control" formControlName="leadId">
+		</div>
+		<div class="form-group">
+			<input type="text" placeholder="managerId" class="form-control" formControlName="managerId">
+		</div>
+		<div class="form-group">
+			<input type="text" placeholder="cl" class="form-control" formControlName="CL">
+		</div>
+		<div class="form-group">
+			<input type="text" placeholder="sl" class="form-control" formControlName="SL">
+		</div>
+		<div class="form-group">
+			<input type="text" placeholder="el" class="form-control" formControlName="EL">
+		</div>
+
+		<div class="form-group">
+			<input type="password" placeholder="password" class="form-control" formControlName="password">
+		</div>
+		<div class="form-group">
+			<select placeholder="user type" class="form-control" formControlName="userType">
+				<option value="">Team member</option>
+				<option value="">Manager</option>
+				<option value="">Team lead</option>
+			</select>
+		</div>
+		<div class="form-group">
+			<button type="submit" class="btn btn-primary">Register</button>
+		</div>
+	</form>
+	
+</div>
