@@ -12,6 +12,10 @@ import { RegisterComponent } from './register/register.component';
 import { EmployeeComponent } from './employee/employee.component';
 import { DashboardComponent } from './employee/dashboard/dashboard.component';
 import { ManagerComponent } from './manager/manager.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { HrComponent } from './hr/hr.component';
+import { ListEmployeeComponent } from './list-employee/list-employee.component';
+import { EmployeeInfoComponent } from './employee-info/employee-info.component';
 
 var appRoute:Routes = [
 	{
@@ -21,10 +25,19 @@ var appRoute:Routes = [
 		path: 'register', component: RegisterComponent
 	},
   {
+    path: 'reset-password', component: ResetPasswordComponent
+  },
+  {
     path: 'dashboard', component: EmployeeComponent
   },
   {
     path: 'get-all-leaves', component: ManagerComponent
+  },
+  {
+    path: 'list-employees', component: ListEmployeeComponent
+  },
+  {
+    path: 'list-employees/:employeeId', component: EmployeeInfoComponent
   }
 ];
 
@@ -36,6 +49,10 @@ var appRoute:Routes = [
     EmployeeComponent,
     DashboardComponent,
     ManagerComponent,
+    ResetPasswordComponent,
+    HrComponent,
+    ListEmployeeComponent,
+    EmployeeInfoComponent,
   ],
   imports: [
     BrowserModule, RouterModule.forRoot(appRoute, { useHash: true }), HttpClientModule, FormsModule, ReactiveFormsModule

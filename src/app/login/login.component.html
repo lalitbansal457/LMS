@@ -1,14 +1,34 @@
-<div>
-	<form [formGroup]="loginForm" (ngSubmit)="loginControl()">
+<div *ngIf="!forgotPassword">
+	<form [formGroup]="loginForm" (ngSubmit)="loginControl()" >
 		<div class="form-group">
-			<input type="text" class="form-control" formControlName="employeeId">
+			<label *ngIf="usernameErr" class="text-danger">Username is incorrect</label>
+			<input type="text" class="form-control" (keyup)="usernameErr = false" [ngClass]="{'is-invalid': usernameErr}" formControlName="employeeId">
 		</div>
 		<div class="form-group">
-			<input type="password" class="form-control" formControlName="password">
+			<label *ngIf="passwordErr" class="text-danger">Password is incorrect</label>
+			<input type="password" (keyup)="passwordErr = false" [ngClass]="{'is-invalid': passwordErr}" class="form-control" formControlName="password">
 		</div>
 		<div class="form-group">
 			<button class="btn btn-primary">Login</button>
 		</div>
 	</form>
-	
+
+	<div class="forgot-password">
+		<a class="text-underline" (click)="forgotPassword = true">Forgot password? </a>
+	</div>
 </div>
+	
+
+	<div *ngIf="forgotPassword">
+		<form [formGroup]="forgotForm" (ngSubmit)="forgotControl()">
+			
+			<div class="form-group">
+				<input type="text" class="form-control" placeholder="Employee Id" formControlName="employeeId">
+			</div>
+			<div class="form-group">
+				<button class="btn btn-primary">Forgot password</button>
+			</div>
+		</form>
+
+		<a class="text-underline" (click)="forgotPassword = false">Login? </a>
+	</div>

@@ -5,15 +5,47 @@
 		<th>Name</th>
 		<th>Leave Date</th>
 		<th>Leave Reason</th>
-		<th>Submitted On</th>
-		<th>Status</th>
+		<th >Submitted On</th>
+		<th >Leave Status (Lead) </th>
+		<th>Leave Status</th>
+		<th>Leave Status (HR)</th>
 	</tr>		
 	<tr *ngFor="let leaveRequest of leaveRequests;let i = index" >
 		<td>{{i+1}}</td>
 		<td>{{leaveRequest.employeeName}}</td>
-		<td>{{leaveRequest.leaveFrom}}<span *ngIf="leaveRequest.fromFirstHalf">(FH)</span><span *ngIf="leaveRequest.fromSecondHalf">(SH)</span> <b *ngIf="leaveRequest.leaveTo"> To</b> {{leaveRequest.leaveTo}}<span *ngIf="leaveRequest.toFirstHalf">(FH)</span></td>
+
+		<td>{{leaveRequest.leaveFrom}}
+			<span *ngIf="leaveRequest.fromFirstHalf">(FH)</span>
+			<span *ngIf="leaveRequest.fromSecondHalf">(SH)</span>
+			<b *ngIf="leaveRequest.leaveTo"> To</b> 
+			{{leaveRequest.leaveTo}}
+			<span *ngIf="leaveRequest.toFirstHalf">(FH)</span>
+		</td>
+
 		<td>{{leaveRequest.leaveReason}}</td>
 		<td>{{leaveRequest.submitDate}}</td>
-		<td>{{leaveRequest.status}} <span *ngIf="leaveRequest.status == 'pending'"><button type="button" (click)="updateLeaveStatus(leaveRequest, i, 'approved')" class="btn btn-primary">Approve</button> <button type="button"  class="btn btn-primary" (click)="updateLeaveStatus(leaveRequest, i, 'denied')">Deny</button></span></td>
+
+		<td>
+			<div *ngIf="leaveRequest.lead">
+				{{leaveRequest.status.lead}} 
+				<span *ngIf="(leaveRequest.status.lead == 'pending') && (userData.userType == 'team lead') ">
+					<button type="button" (click)="updateLeaveStatus(leaveRequest, i, 'approved')" class="btn btn-primary">Approve</button> 
+					<button type="button"  class="btn btn-primary" (click)="updateLeaveStatus(leaveRequest, i, 'denied')">Deny</button>
+				</span>
+			</div>
+		</td>
+
+		<td>{{leaveRequest.status.manager}} 
+			<span *ngIf="leaveRequest.status.manager == 'pending'">
+				<button type="button" (click)="updateLeaveStatus(leaveRequest, i, 'approved')" class="btn btn-primary">Approve</button> 
+				<button type="button"  class="btn btn-primary" (click)="updateLeaveStatus(leaveRequest, i, 'denied')">Deny</button>
+			</span>
+		</td>
+		<td>{{leaveRequest.status.hr}} 
+			<span *ngIf="(leaveRequest.status.hr == 'pending') && (userData.userType == 'hr')">
+				<button type="button" (click)="updateLeaveStatus(leaveRequest, i, 'approved')" class="btn btn-primary">Approve</button> 
+				<button type="button"  class="btn btn-primary" (click)="updateLeaveStatus(leaveRequest, i, 'denied')">Deny</button>
+			</span>
+		</td>
 	</tr>
 </table>	

@@ -13,10 +13,23 @@
 		</div>
 
 		<div class="form-group">
-			<input type="text" placeholder="leadId" class="form-control" formControlName="leadId">
+			<select class="form-control" formControlName="lead">
+				<option *ngFor="let lead of leadList" [ngValue]="lead">{{lead.name}}</option>
+			</select>
 		</div>
+
 		<div class="form-group">
-			<input type="text" placeholder="managerId" class="form-control" formControlName="managerId">
+			<select class="form-control" placeholder="cdascs" formControlName="manager">
+				<option *ngFor="let manager of managerList" [ngValue]="manager">{{manager.name}}</option>
+			</select>
+
+			<!-- {{registerForm.get('managerData').value}} -->
+		</div>
+
+		<div class="form-group">
+			<select class="form-control" formControlName="hr">
+				<option *ngFor="let hr of hrList" [ngValue]="hr">{{hr.name}}</option>
+			</select>
 		</div>
 		<div class="form-group">
 			<input type="text" placeholder="cl" class="form-control" formControlName="CL">
@@ -31,13 +44,16 @@
 		<div class="form-group">
 			<input type="password" placeholder="password" class="form-control" formControlName="password">
 		</div>
+
 		<div class="form-group">
-			<select placeholder="user type" class="form-control" formControlName="userType">
-				<option value="">Team member</option>
-				<option value="">Manager</option>
-				<option value="">Team lead</option>
+			<select placeholder="User type" class="form-control" formControlName="userType">
+				<option [selected]="true">Team member</option>
+				<option>manager</option>
+				<option>lead</option>
+				<option>hr</option>
 			</select>
 		</div>
+
 		<div class="form-group">
 			<button type="submit" class="btn btn-primary">Register</button>
 		</div>

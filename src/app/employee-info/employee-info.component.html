@@ -1,0 +1,57 @@
+<div>
+	<form [formGroup]="editForm" (ngSubmit)="editControl()">
+		<div class="form-group">
+			<label>Name:</label>
+			<input type="text" class="form-control"  formControlName="name">
+		</div>
+		<div class="form-group">
+			<label>Employee Id:</label>
+			<input type="text" class="form-control"  formControlName="employeeId">
+		</div>
+		<div class="form-group">
+			<label>Email:</label>
+			<input type="text" class="form-control"  formControlName="email">
+		</div>
+
+		<div class="form-group">
+			<label>SL:</label>
+			<input type="text" class="form-control"  formControlName="SL">
+		</div>
+		<div class="form-group">
+			<label>CL:</label>
+			<input type="text" class="form-control"  formControlName="CL">
+		</div>
+		<div class="form-group">
+			<label>EL:</label>
+			<input type="text" class="form-control"  formControlName="EL">
+		</div>
+		<div class="form-group">
+			<label>Manager:</label>
+			<select class="form-control" formControlName="manager">
+				<option value="{{manager}}" [selected]="manager.name == employee?.manager?.name" *ngFor="let manager of managerList">{{manager.name}}</option>
+			</select>
+		</div>
+		<div class="form-group">
+			<label>Lead:</label>
+			<select class="form-control" formControlName="lead">
+				<option value="{{lead}}" [selected]="lead.name == employee?.lead?.name" *ngFor="let lead of leadList">{{lead.name}}</option>
+			</select>
+		</div>
+		<div class="form-group">
+			<label>Hr:</label>
+			<select class="form-control" formControlName="hr">
+				<option value="{{hr}}" [selected]="hr.name == employee?.hr?.name" *ngFor="let hr of hrList">{{hr.name}}</option>
+			</select>
+		</div>
+		<div class="form-group">
+			<label>Usertype:</label>
+			<select class="form-control" formControlName="userType">
+				<option  [selected]="userType == employee.userType" *ngFor="let userType of userType">{{userType}}</option>
+			</select>
+		</div>
+		<div class="form-group">
+			<button type="submit" class="btn btn-primary">Save Changes</button>
+		</div>
+	</form>
+
+</div>

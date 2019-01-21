@@ -34,6 +34,26 @@ export class UserService {
   }
 
 
+  forgotPassword(obj) {
+    return this.http.post(this.constantService.apiUrl +'/forgot-password', obj).pipe(map((res)=>{
+      return res ;
+    }),
+    catchError(error =>{
+      throw(error);
+    })
+    )
+  }
+
+  getUserData(obj) {
+    return this.http.post(this.constantService.apiUrl + '/get-user-data', obj).pipe(map((res)=>{
+      return res;
+    }),
+    catchError(error =>{
+      throw(error);
+    }))
+  }
+
+
   applyLeave(obj) {
   	console.log(obj)
   	return this.http.post(this.constantService.apiUrl + '/apply-leave', obj).pipe(map((res:any)=>{
@@ -75,6 +95,38 @@ export class UserService {
   		throw(error);
   	})
   	)
+  }
+
+  resetPassword(obj) {
+    return this.http.post(this.constantService.apiUrl + '/reset-password', obj).pipe(map((res:any)=>{
+      return res;
+    }), 
+    catchError(error=>{
+      throw(error);
+    })
+    )
+  }
+
+
+  listEmployees() {
+      return this.http.get(this.constantService.apiUrl + '/get-all-employees').pipe(map((res:any)=>{
+        return res;
+      }), 
+      catchError(error=>{
+        throw(error);
+      })
+      )
+  }
+
+  
+  updateUser(obj) {
+    return this.http.post(this.constantService.apiUrl + '/update-user', obj).pipe(map((res:any)=>{
+      return res;
+    }), 
+    catchError(error=>{
+      throw(error);
+    })
+    )
   }
 
 

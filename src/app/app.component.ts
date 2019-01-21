@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { DataService } from "./services/data.service";
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,14 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'nodeLearning1';
+  message:string;
+
+  constructor(private data: DataService) {
+
+  }
+
+  	ngOnInit() {
+	  	//this.data.currentMessage.subscribe(message => this.message = message);
+	}
+
 }

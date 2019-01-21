@@ -17,7 +17,8 @@ export class ManagerComponent implements OnInit {
   		this.userData = JSON.parse(localStorage.getItem('userData'));
   	}
 
-  	this.getLeaveData({'managerId': this.userData['employeeId']});
+    var userType = this.userData['userType'] + '.id';
+  	this.getLeaveData({[userType]: this.userData['employeeId']});
   }
 
   ngOnInit() {
@@ -44,16 +45,20 @@ export class ManagerComponent implements OnInit {
   	requestObj.email = leaveData.email;
   	requestObj.leaveType = leaveData.leaveType;
   	requestObj.employeeId = leaveData.employeeId;
-  	requestObj.employeeEmail = leaveData.employeeEmail;
+    requestObj.employeeEmail = leaveData.employeeEmail;
+    requestObj.manager = leaveData.manager;
+    requestObj.lead = leaveData.lead;
+  	requestObj.hr = leaveData.hr;
   	requestObj.leaveCount = leaveCount;
   	requestObj.status = status;
+    requestObj.userType = this.userData['userType'];
 
   	if(status == "approved") {
   		this.userService.updateLeaveStatus(requestObj).subscribe(res => {
   			console.log(this.leaveRequests);
 
   			if(res.ok) {
-  				this.leaveRequests[index].status = "approved";
+  				this.leaveRequests[index].status[requestObj.userType] = "approved";
   			}
   		})
   	} else {
@@ -61,7 +66,7 @@ export class ManagerComponent implements OnInit {
   			console.log(this.leaveRequests);
 
   			if(res.ok) {
-  				this.leaveRequests[index].status = "Denied";
+  				this.leaveRequests[index].status[requestObj.userType] = "Denied";
   			}
   		})
   	}

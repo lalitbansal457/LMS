@@ -66,16 +66,20 @@
 				<th>Leave Date</th>
 				<th>Leave Reason</th>
 				<th>Submitted On</th>
-				<th>Current Status</th>
-				<th>Comment by reviewer</th>
+				<th *ngIf="userData.lead">Current Status (Lead)</th>
+				<th *ngIf="userData.manager">Current Status (Manager)</th>
+				<th>Current Status (HR)</th>
+				<!-- <th>Comment by reviewer</th> -->
 			</tr>		
 			<tr *ngFor="let leaveRequest of leaveRequests;let i = index" >
 				<td>{{i+1}}</td>
 				<td>{{leaveRequest.leaveFrom}}<span *ngIf="leaveRequest.fromFirstHalf">(FH)</span><span *ngIf="leaveRequest.fromSecondHalf">(SH)</span> - {{leaveRequest.leaveTo}}<span *ngIf="leaveRequest.toFirstHalf">(FH)</span></td>
 				<td>{{leaveRequest.leaveReason}}</td>
 				<td>{{leaveRequest.submitDate}}</td>
-				<td>{{leaveRequest.status}}</td>
-				<td>{{leaveRequest.comment}}</td>
+				<td *ngIf="userData.lead">{{leaveRequest.status.lead}}</td>
+				<td *ngIf="userData.manager">{{leaveRequest.status.manager}}</td>
+				<td>{{leaveRequest.status.hr}}</td>
+				<!-- <td>{{leaveRequest.comment}}</td> -->
 			</tr>
 		</table>		
 	</div>				

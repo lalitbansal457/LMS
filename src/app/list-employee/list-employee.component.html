@@ -1,0 +1,31 @@
+
+
+<div>
+	<table class="table table-bordered table-striped">
+		<caption>Employee List</caption>
+		<tr>
+			<th>Employee Name</th>
+			<th>Id</th>
+			<th>Email</th>
+			<th>Manager name</th>
+			<th>Lead name</th>
+			<th>Hr name</th>
+			<th>Leaves</th>
+			<th>Action</th>
+		</tr>	
+		<tr *ngFor="let employee of employeeList;let i = index" >
+			<td>{{employee.name}}</td>
+			<td>{{employee.employeeId}}</td>
+			<td>{{employee.email}}</td>
+			<td>{{employee.manager?.name}}</td>
+			<td>{{employee.lead?.name}}</td>
+			<td>{{employee.hr?.name}}</td>
+			<td>
+				<div><b>CL:</b> {{employee.CL}}</div>
+				<div><b>SL:</b> {{employee.SL}}</div>
+				<div><b>EL:</b> {{employee.EL}}</div>
+			</td>
+			<td><a (click)="employeeInfo(employee.employeeId)">Edit</a></td>
+		</tr>
+	</table>
+</div>
